@@ -26,6 +26,25 @@ function App() {
     
   ]);
 
+  function tarefaClicada(tasksId){
+    const novaTask = tasks.map(task =>{
+      if(task.id === tasksId){
+        return {...task, completa: !task.completa}
+      }
+
+      return task
+    })
+
+    setTasks(novaTask)
+
+  }
+
+  function excluirTarefa(taskId){
+    const novaTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(novaTasks);
+}
+
+
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
       <div className="w-[500px]">
@@ -33,7 +52,7 @@ function App() {
           Gerenciador de tarefas
         </h1>
         <AddTasks />
-        <Tasks tasks={tasks} />
+        <Tasks tasks={tasks} tarefaClicada={tarefaClicada} excluirTarefa={excluirTarefa} />
       </div>
     </div>
   );
