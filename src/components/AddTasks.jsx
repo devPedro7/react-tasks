@@ -6,11 +6,12 @@ function AddTasks(props) {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const notificaErro = () => {
-    toast.error("Você não pode inserir uma tarefa vazia! 😉");
+    toast.warning("Você não pode inserir uma tarefa vazia! 😉");
   };
   const notificaCriacaoTarefa = () => {
     toast.success("Tarefa criada! 🚀");
   };
+
 
   return (
     <div className=" space-y-4 p-6 bg-slate-200 rounded-md shadow flex flex-col">
