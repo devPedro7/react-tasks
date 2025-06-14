@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
 import { ToastContainer } from "react-toastify";
@@ -7,26 +7,12 @@ import { v4 } from "uuid";
 
 function App() {
   //STATE
-  const [tasks, setTasks] = useState([
-    {
-      id: v4(),
-      titulo: "Estudar programação",
-      descricao: "Estudar react",
-      completa: false,
-    },
-    {
-      id: v4(),
-      titulo: "Fazer compras",
-      descricao: "Comprar arroz, feijao, legumes e carnes para a dieta",
-      completa: false,
-    },
-    {
-      id: v4(),
-      titulo: "Ir pra academia",
-      descricao: "Treinar pra ficar gostoso",
-      completa: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tarefas")) || []);
+
+  //executa a primeira funcao, sempre que o valor da lista for alterada
+  useEffect(() =>{
+    localStorage.setItem("tarefas", JSON.stringify(tasks))
+  }, [tasks])
 
   function tarefaClicada(tasksId) {
     const novaTask = tasks.map((task) => {
